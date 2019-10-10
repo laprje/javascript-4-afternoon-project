@@ -29,7 +29,17 @@
   Call your class Employee and receive all the data in the constructor in the order listed above.
 */
 
-//Code Here
+class Employee {
+  constructor (first_name, last_name, email, age) {
+    this.first_name = first_name
+    this.last_name = last_name
+    this.email = email
+    this.age = age
+  }
+  makeWidget() {
+    return `${this.first_name} ${this.last_name} Widget`
+  }
+}
 
 
 ////////// PROBLEM 2 //////////
@@ -47,7 +57,18 @@
   Call your new class Manager
 */
 
-//Code Here
+class Manager extends Employee {
+  constructor (first_name, last_name, email, age) {
+    super(first_name, last_name, email, age);
+    this.reports = [];
+  }
+  hire(Employee) {
+    this.reports.push(Employee);
+  }
+  fire(index) {
+    this.reports.splice(index,1);
+  }
+}
 
 
 ////////// PROBLEM 3 //////////
@@ -71,22 +92,43 @@
   Call your new class ProgressiveManager
 */
 
-//Code Here
+class ProgressiveManager extends Manager {
+  constructor(first_name, last_name, email, age) {
+    super(first_name, last_name, email, age);
+    this.title = "Not a manager";
+    this.bonus = 0;
+  }
 
-
+  hire(Employee) {
+    this.reports.push(Employee);
+    if(1 <= this.reports.length && this.reports.length <= 3) {
+      this.title = "Barely Manager";
+    } else if(4 <= this.reports.length && this.reports.length <= 10) {
+      this.title = "Mostly Manager";
+    } else if(11 <= this.reports.length && this.reports.length <= 50) {
+      this.title = "Manager";
+    } else if(51 <= this.reports.length && this.reports.length <= 100) {
+      this.title = "Manager Plus";
+    } else if(this.reports.length && this.reports.length >= 101) {
+      this.title = "Bestest Manager";
+    }
+  }
+  
+  fire(index) {
+    this.bonus+=100;
+  }
+}
 
 ////////// PROBLEM 4 - Black Diamond //////////
 
 /*
   Widget Co has a factory that makes widgets.
   Factories have Machines.
-
   Make a Machine class that takes in no parameters
   A Machine has the following properties:
     - widgets_made_count - default 0
     - wear_and_tear_count - default 0
     - needs_reboot - default false
-
   A Machine has the following methods:
     - makeWidgets
         - This function takes in a number and increases widgets_made_count by that amount
@@ -99,5 +141,3 @@
 */
 
 //Code Here
-
-
